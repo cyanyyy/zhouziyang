@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>打字小达人-广州科教版英语2026新版六年级上册单词打字练习</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: system-ui, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+    }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: linear-gradient(145deg, #f7f9fc 0%, #e6ecf5 100%);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 16px;
+    }
+    .app-card {
+      max-width: 800px;
+      width: 100%;
+      background: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      border-radius: 56px;
+      padding: 30px 28px 40px;
+      box-shadow: 0 20px 40px rgba(0, 10, 30, 0.2), 0 8px 20px rgba(0, 0, 0, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.6);
+      transition: all 0.2s;
+    }
+    h1 {
+      font-size: 2.1rem;
+      font-weight: 600;
+      letter-spacing: -0.5px;
+      color: #1d2b4b;
+      margin: 0 0 8px 0;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    h1 small {
+      font-size: 0.9rem;
+      font-weight: 400;
+      background: #2a3f66;
+      color: white;
+      padding: 4px 16px;
+      border-radius: 40px;
+      letter-spacing: 0.3px;
+      opacity: 0.9;
+    }
+    .stats {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #d9e2ef;
+      padding: 10px 18px;
+      border-radius: 60px;
+      margin: 10px 0 18px 0;
+      font-weight: 500;
+      color: #1d2b4b;
+      flex-wrap: wrap;
+      gap: 6px 12px;
+    }
+    .stats span {
+      background: white;
+      padding: 4px 16px;
+      border-radius: 30px;
+      box-shadow: inset 0 1px 4px rgba(0,0,0,0.05);
+    }
+    .word-display {
+      background: #ffffffcc;
+      backdrop-filter: blur(2px);
+      border-radius: 80px;
+      padding: 24px 12px;
+      margin: 16px 0 24px 0;
+      text-align: center;
+      border: 2px solid #b7c9e2;
+      box-shadow: inset 0 4px 8px rgba(0,0,0,0.02);
+    }
+    .word-display .en {
+      font-size: 3.2rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      color: #0b1a33;
+      line-height: 1.2;
+      word-break: break-word;
+    }
+    .word-display .hint {
+      font-size: 1rem;
+      color: #3a4f72;
+      background: #eef3fa;
+      display: inline-block;
+      padding: 4px 22px;
+      border-radius: 30px;
+      margin-top: 6px;
+      font-weight: 400;
+    }
+    .input-area {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      margin: 20px 0 24px;
+    }
+    .input-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+    }
+    #wordInput {
+      flex: 2 1 200px;
+      padding: 16px 22px;
+      font-size: 1.4rem;
+      border: 2px solid #b0c6df;
+      border-radius: 60px;
+      outline: none;
+      background: white;
+      transition: 0.2s;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+      color: #13203a;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+    }
+    #wordInput:focus {
+      border-color: #2f5a9c;
+      box-shadow: 0 0 0 4px rgba(47, 90, 156, 0.2);
+    }
+    #wordInput:disabled {
+      background: #eef3f8;
+      color: #3d4f6b;
+    }
+    .btn {
+      background: white;
+      border: none;
+      padding: 14px 28px;
+      border-radius: 60px;
+      font-weight: 600;
+      font-size: 1.1rem;
+      color: #1d2b4b;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.02);
+      border: 1px solid #b7c9e2;
+      cursor: pointer;
+      transition: all 0.15s;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      background: #f2f7ff;
+      flex: 0 1 auto;
+    }
+    .btn-primary {
+      background: #1d3b6f;
+      border: 1px solid #1d3b6f;
+      color: white;
+      box-shadow: 0 6px 12px rgba(26, 67, 133, 0.2);
+    }
+    .btn-primary:hover:not(:disabled) {
+      background: #244a86;
+      transform: scale(0.97);
+    }
+    .btn-primary:disabled {
+      opacity: 0.5;
+      transform: none;
+      cursor: not-allowed;
+    }
+    .btn-secondary {
+      background: #eef3fa;
+      border-color: #b7c9e2;
+    }
+    .btn-secondary:hover:not(:disabled) {
+      background: #dce6f2;
+    }
+    .options-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin: 20px 0 12px;
+    }
+    .option-btn {
+      background: white;
+      border: 2px solid #c9d8ec;
+      border-radius: 60px;
+      padding: 16px 8px;
+      font-size: 1.2rem;
+      font-weight: 500;
+      color: #0f1f3a;
+      transition: all 0.1s;
+      cursor: pointer;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+      text-align: center;
+      word-break: break-word;
+    }
+    .option-btn:hover:not(:disabled) {
+      background: #e6effa;
+      border-color: #7f9bc9;
+      transform: scale(0.98);
+    }
+    .option-btn.correct {
+      background: #a3d8b0;
+      border-color: #1f7840;
+      color: #0a3d1f;
+      pointer-events: none;
+    }
+    .option-btn.wrong {
+      background: #f8cfcf;
+      border-color: #b13e3e;
+      color: #6f1f1f;
+      pointer-events: none;
+    }
+    .option-btn:disabled {
+      opacity: 0.7;
+      cursor: not-allowed;
+    }
+    .feedback-message {
+      min-height: 3rem;
+      font-size: 1.1rem;
+      margin: 12px 0 6px;
+      padding: 10px 16px;
+      border-radius: 40px;
+      background: #eef3fa;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .feedback-message .emoji {
+      font-size: 1.7rem;
+    }
+    .action-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 14px;
+      margin-top: 18px;
+    }
+    .footer-note {
+      font-size: 0.8rem;
+      color: #3d557a;
+      text-align: center;
+      margin-top: 22px;
+      opacity: 0.7;
+      border-top: 1px solid #c9d8ec;
+      padding-top: 18px;
+    }
+    @media (max-width: 500px) {
+      .app-card { padding: 22px 16px; }
+      .word-display .en { font-size: 2.4rem; }
+      .options-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
+      .option-btn { font-size: 1rem; padding: 14px 4px; }
+      #wordInput { font-size: 1.2rem; padding: 14px 18px; }
+    }
+  </style>
+</head>
+<body>
+<div class="app-card" id="app">
+  <h1>
+    ⌨️ 打字小达人
+    <small>单词范围：广州科教版2026新版六年级上册</small>
+  </h1>
+  <div class="stats">
+    <span>✅ <span id="scoreDisplay">0</span></span>
+    <span>📦 <span id="totalDisplay">0</span></span>
+    <span>⏳ <span id="progressDisplay">0/0</span></span>
+  </div>
+
+  <div class="word-display">
+    <div class="en" id="currentWordEn">breath</div>
+    <div class="hint" id="currentHint">✏️ 输入单词，再选意思</div>
+  </div>
+
+  <div class="input-area">
+    <div class="input-row">
+      <input type="text" id="wordInput" placeholder="输入英文..." autocomplete="off" autofocus>
+      <button class="btn btn-primary" id="checkWordBtn">↵ 打字确认</button>
+    </div>
+  </div>
+
+  <div class="options-grid" id="optionsContainer">
+    <button class="option-btn" data-index="0">呼吸</button>
+    <button class="option-btn" data-index="1">扔，抛</button>
+    <button class="option-btn" data-index="2">数，计数</button>
+    <button class="option-btn" data-index="3">将要；会</button>
+  </div>
+
+  <div class="feedback-message" id="feedback">
+    <span class="emoji">💡</span>
+    <span id="feedbackText">输入单词，再选正确中文</span>
+  </div>
+
+  <div class="action-row">
+    <button class="btn btn-secondary" id="nextWordBtn">⏩ 下一词</button>
+    <button class="btn btn-secondary" id="resetBtn">🔄 重新开始</button>
+  </div>
+  <div class="footer-note">✏️ 打字正确 + 选对中文 = 得分</div>
+</div>
+<script>
+  (function() {
+    // ---------- 完整词库 (包含所有单词 + 短语, 来自附件全部内容) ----------
+    const FULL_WORDS = [
+      // Unit 1 单词
+      { en: "breath", zh: "呼吸" },
+      { en: "throw", zh: "扔，抛" },
+      { en: "count", zh: "数，计数" },
+      { en: "will", zh: "将要；会" },
+      { en: "music", zh: "音乐" },
+      { en: "try", zh: "尝试" },
+      { en: "with", zh: "和……一起" },
+      { en: "why", zh: "为什么" },
+      // Unit 1 短语
+      { en: "yell and cry", zh: "边哭边喊" },
+      { en: "go for a walk", zh: "出去走走" },
+      { en: "shout bad words", zh: "大声骂人" },
+      { en: "take a deep breath", zh: "深呼吸" },
+      { en: "throw things", zh: "扔东西" },
+      { en: "count to ten", zh: "数到十" },
+      { en: "very angry", zh: "非常生气" },
+      { en: "eat a lot", zh: "吃很多" },
+      { en: "listen to some music", zh: "听一点音乐" },
+      { en: "yell out loud", zh: "大声喊叫" },
+      { en: "talk with friends on the phone", zh: "与朋友通电话" },
+      { en: "calm down", zh: "冷静，平静下来" },
+      { en: "solve the problem", zh: "解决问题" },
+      { en: "I feel ...", zh: "我觉得……" },
+      { en: "I don't like it because ...", zh: "我不喜欢它，因为……" },
+      { en: "I get ... when ...", zh: "每当……时，我就会……" },
+      { en: "I got really ... because ...", zh: "我真的很……，因为……" },
+      // Unit 2 单词
+      { en: "lion", zh: "狮子" },
+      { en: "call", zh: "称呼；喊" },
+      { en: "stop", zh: "停止" },
+      { en: "joke", zh: "玩笑" },
+      { en: "worse", zh: "更糟糕的，更差的" },
+      { en: "mad", zh: "生气的" },
+      { en: "also", zh: "也；此外" },
+      { en: "make", zh: "制作" },
+      { en: "proud", zh: "骄傲的，自豪的" },
+      // Unit 2 短语
+      { en: "talk it out", zh: "谈话和解" },
+      { en: "have a new haircut", zh: "剪了个新发型" },
+      { en: "make fun of ...", zh: "开某人的玩笑" },
+      { en: "call ... names", zh: "给……起外号" },
+      { en: "yell at ...", zh: "对……喊叫" },
+      { en: "fight with each other", zh: "双方争吵" },
+      { en: "I feel ... when you ...", zh: "当你……时，我觉得……" },
+      // Unit 3 单词
+      { en: "bring", zh: "提出；带来" },
+      { en: "might", zh: "可能" },
+      { en: "cup", zh: "杯子" },
+      { en: "dangerous", zh: "危险的" },
+      { en: "homework", zh: "作业" },
+      { en: "lie", zh: "欺骗，撒谎" },
+      { en: "finish", zh: "完成" },
+      { en: "record", zh: "录制；记录" },
+      { en: "choose", zh: "选择" },
+      { en: "their", zh: "他们的" },
+      // Unit 3 短语
+      { en: "bring up the problem", zh: "提出问题" },
+      { en: "listen to each other", zh: "彼此倾听" },
+      { en: "take turns to talk", zh: "轮流交谈" },
+      { en: "come up with ideas", zh: "提出想法" },
+      { en: "work it out together", zh: "一起想办法解决" },
+      { en: "finish homework", zh: "完成作业" },
+      { en: "Can I talk to you?", zh: "我可以和你谈谈吗？" },
+      { en: "I understand.", zh: "我明白。" },
+      { en: "But it will help me ...", zh: "但它会帮我……" },
+      { en: "Maybe I can ... first?", zh: "也许我可以先……？" },
+      { en: "Good idea!", zh: "好主意！" },
+      { en: "Do you have a minute?", zh: "你有时间吗？" },
+      { en: "I understand your worries, but ...", zh: "我理解你的担心，但是……" },
+      { en: "That makes sense.", zh: "那有道理。" },
+      { en: "Maybe we can ...", zh: "或许我们可以……" },
+      { en: "Or ... is that okay?", zh: "或许……可以吗？" },
+      // Unit 4 单词
+      { en: "play", zh: "玩" },
+      { en: "stay", zh: "停留；保持" },
+      { en: "toy", zh: "玩具" },
+      { en: "dig", zh: "挖掘" },
+      { en: "least", zh: "至少，最少" },
+      { en: "habit", zh: "习性，习惯" },
+      { en: "between", zh: "在……之间" },
+      { en: "building", zh: "建筑物" },
+      { en: "much", zh: "许多，大量" },
+      { en: "orange", zh: "橙色的；橙子" },
+      { en: "push", zh: "推" },
+      // Unit 4 短语
+      { en: "play during the night", zh: "在夜间玩耍" },
+      { en: "stay inside", zh: "待在室内" },
+      { en: "sleep during the day", zh: "白天睡觉" },
+      { en: "don't like to be alone", zh: "不喜欢独处" },
+      { en: "lose hair", zh: "掉毛" },
+      { en: "love playing with toys", zh: "喜欢玩玩具" },
+      { en: "very busy at work", zh: "工作很忙" },
+      { en: "an animal lover", zh: "一个动物爱好者" },
+      { en: "a light sleeper", zh: "一个睡得浅的人" },
+      { en: "like to go to the park", zh: "喜欢去公园" },
+      { en: "go to school early", zh: "上学很早" },
+      { en: "far away", zh: "很远" },
+      { en: "... and ... are different because ...", zh: "……和……不同，因为……" },
+      { en: "Good point!", zh: "说得对！" },
+      { en: "They both love ...", zh: "他们都喜欢……" },
+      { en: "They are both ...", zh: "他们都……" },
+      { en: "... are ...,while ... are ...", zh: "……是……样的，但……却是……样的。" },
+      { en: "I agree.", zh: "我同意。" },
+      { en: "I don't agree because ...", zh: "我不同意，因为……" },
+      { en: "I think it's better to ...", zh: "我认为……更好。" },
+      // Unit 5 单词
+      { en: "wait", zh: "等待" },
+      { en: "learn", zh: "学习" },
+      { en: "bike", zh: "自行车" },
+      { en: "money", zh: "钱" },
+      { en: "online", zh: "在线的，网上的" },
+      { en: "free", zh: "免费的；空闲的；自由的" },
+      { en: "clock", zh: "钟表" },
+      { en: "notebook", zh: "笔记本" },
+      { en: "cost", zh: "花费" },
+      { en: "cheap", zh: "便宜" },
+      { en: "glove", zh: "手套" },
+      { en: "sometimes", zh: "有时候" },
+      { en: "little", zh: "少量的；小的" },
+      // Unit 5 短语
+      { en: "shop smart", zh: "理智购物" },
+      { en: "think about it more", zh: "多考虑一下" },
+      { en: "wait a few days", zh: "等几天" },
+      { en: "learn about it", zh: "了解它" },
+      { en: "look for a better deal", zh: "寻找更划算的交易" },
+      { en: "give it a try", zh: "试一试" },
+      { en: "compare and choose", zh: "比较并选择" },
+      { en: "buy one get one free", zh: "买一送一" },
+      { en: "a jump rope", zh: "一个跳绳" },
+      { en: "Wait a minute.", zh: "等一下。" },
+      { en: "Do I really need it?", zh: "我真的需要它吗？" },
+      { en: "Do I just want it?", zh: "我是否只是想要它？" },
+      { en: "Do I need that thing right now?", zh: "我现在需要那个东西吗？" },
+      { en: "Is it the best deal?", zh: "这是最好的交易吗？" },
+      // Unit 6 单词
+      { en: "please", zh: "请" },
+      { en: "waste", zh: "垃圾；浪费" },
+      { en: "snack", zh: "零食，小吃" },
+      { en: "noon", zh: "中午" },
+      { en: "change", zh: "改变" },
+      { en: "menu", zh: "菜单" },
+      { en: "classmate", zh: "同学" },
+      { en: "helpful", zh: "有帮助的，有益的" },
+      { en: "fourth", zh: "第四" },
+      { en: "fifth", zh: "第五" },
+      { en: "difference", zh: "不同" },
+      // Unit 6 短语
+      { en: "give too much food", zh: "给太多食物" },
+      { en: "food waste", zh: "厨余垃圾" },
+      { en: "take too much food", zh: "拿太多食物" },
+      { en: "be picky about food", zh: "挑食" },
+      { en: "eat snacks", zh: "吃零食" },
+      { en: "rush out to play", zh: "冲出去玩" },
+      { en: "canteen staff", zh: "食堂员工" },
+      { en: "have a good breakfast", zh: "早餐吃得好" },
+      { en: "take less food", zh: "少拿点食物" },
+      { en: "change the menu", zh: "更换菜单" },
+      { en: "try all kinds of foods", zh: "尝试各种食物" },
+      { en: "save food for later", zh: "留些食物晚些吃" },
+      { en: "It's not good to ...", zh: "……是很不好的。" },
+      { en: "We found that ...", zh: "我们发现……" },
+      { en: "The reason is ...", zh: "原因是……" },
+      { en: "This happens because ...", zh: "发生这种情况是因为……" },
+      // Unit 7 单词
+      { en: "break", zh: "休息，间歇；打破" },
+      { en: "right", zh: "恰当的；对的；右边的" },
+      { en: "playground", zh: "操场" },
+      { en: "yesterday", zh: "昨天" },
+      { en: "important", zh: "重要的" },
+      { en: "without", zh: "没有" },
+      { en: "hospital", zh: "医院" },
+      { en: "rest", zh: "休息" },
+      { en: "another", zh: "另一个" },
+      { en: "team", zh: "团队" },
+      { en: "watch", zh: "观察；看" },
+      // Unit 7 短语
+      { en: "drink enough water", zh: "喝足量的水" },
+      { en: "take water breaks", zh: "休息下，喝点水" },
+      { en: "warm up", zh: "热身" },
+      { en: "wear the right shoes", zh: "穿合适的鞋子" },
+      { en: "work with your teammates", zh: "和队友合作" },
+      { en: "watch out for others on the playground", zh: "在操场上小心他人" },
+      { en: "don't play if you are hurt", zh: "受伤了就别运动" },
+      { en: "follow the rules", zh: "遵守规则" },
+      { en: "learn a lesson", zh: "吸取教训" },
+      { en: "We should ... before ...", zh: "我们应该在……之前……" },
+      { en: "Tell me what happened.", zh: "告诉我发生了什么。" },
+      { en: "First things first,make sure to ...", zh: "首先，一定确保……" },      
+      { en: "Also, don't forget to ...", zh: "另外，别忘了……" },
+      { en: "What's more, it's a good idea to ...", zh: "另外，……也是个好办法。" },
+      { en: "One last thing, ...", zh: "最后一件事，……" },
+      { en: "How are you feeling?", zh: "你感觉怎么样？" },
+      { en: "How did this happen?", zh: "这是怎么发生的？" },
+      { en: "Does it hurt?", zh: "疼吗？" },
+      { en: "Don't worry.", zh: "别担心。" },      
+      { en: "Let me see.", zh: "让我看看。" },
+      { en: "Let me take a closer look.", zh: "让我仔细看看。" },
+
+      // Review 单词
+      { en: "lonely", zh: "孤单的" },
+      { en: "garden", zh: "花园" },
+      { en: "tool", zh: "工具" },
+      { en: "basket", zh: "篮子" },
+      { en: "potato", zh: "土豆" },
+      { en: "either", zh: "也；（两者中的）任何一个" },
+      // Review 短语
+      { en: "stay healthy", zh: "保持健康" },
+      { en: "have a sweet tooth", zh: "爱吃甜食" },
+      { en: "build good habits", zh: "养成好习惯" },
+      { en: "get some sunshine", zh: "晒晒太阳" },
+      { en: "If you ask me, I'd say ...", zh: "如果你问我的话，我会说……" },
+      { en: "How's it going?", zh: "最近怎么样？" }
+    ];
+
+    // ---------- 核心状态 ----------
+    let wordList = [];               // 当前使用的词库 (打乱)
+    let currentIndex = 0;           // 当前单词在 wordList 中的索引
+    let score = 0;
+    let totalAttempts = 0;          // 已处理单词数 (包括跳过/完成)
+    let answered = false;           // 当前题目是否已答 (防止重复操作)
+    let currentWordObj = null;      // 当前单词对象 { en, zh }
+    let currentOptions = [];        // 当前四个选项 [zh1, zh2, zh3, zh4]
+    let correctAnswer = '';         // 当前正确中文
+
+    // DOM 元素
+    const wordEnEl = document.getElementById('currentWordEn');
+    const hintEl = document.getElementById('currentHint');
+    const wordInput = document.getElementById('wordInput');
+    const checkBtn = document.getElementById('checkWordBtn');
+    const optionsBtns = document.querySelectorAll('.option-btn');
+    const feedbackText = document.getElementById('feedbackText');
+    const feedbackEmoji = document.querySelector('.feedback-message .emoji');
+    const scoreSpan = document.getElementById('scoreDisplay');
+    const totalSpan = document.getElementById('totalDisplay');
+    const progressSpan = document.getElementById('progressDisplay');
+    const nextBtn = document.getElementById('nextWordBtn');
+    const resetBtn = document.getElementById('resetBtn');
+
+    // ---------- 辅助函数 ----------
+    function shuffleArray(arr) {
+      for (let i = arr.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+      }
+      return arr;
+    }
+
+    // 从词库中随机取 4 个不同中文 (包含正确中文)
+    function generateOptions(correctZh, excludeEn) {
+      const allZh = wordList.map(w => w.zh);
+      const uniqueZh = [...new Set(allZh)];
+      let candidates = uniqueZh.filter(z => z !== correctZh);
+      while (candidates.length < 3) {
+        candidates.push('★');
+      }
+      const shuffledCandidates = shuffleArray([...candidates]);
+      const distractors = shuffledCandidates.slice(0, 3);
+      let opts = [correctZh, ...distractors];
+      opts = shuffleArray(opts);
+      return opts;
+    }
+
+    // 重置当前题目 (载入新词)
+    function loadWord(index) {
+      answered = false;
+      wordInput.disabled = false;
+      wordInput.value = '';
+      wordInput.focus();
+      optionsBtns.forEach(btn => {
+        btn.disabled = false;
+        btn.classList.remove('correct', 'wrong');
+      });
+      checkBtn.disabled = false;
+
+      const word = wordList[index];
+      if (!word) {
+        wordEnEl.textContent = '🎉 完成!';
+        hintEl.textContent = '所有单词已练习';
+        feedbackText.textContent = '太棒啦！点击「重新开始」再来一轮';
+        feedbackEmoji.textContent = '🏆';
+        optionsBtns.forEach(btn => { btn.disabled = true; });
+        wordInput.disabled = true;
+        checkBtn.disabled = true;
+        return;
+      }
+      currentWordObj = word;
+      correctAnswer = word.zh;
+      wordEnEl.textContent = word.en;
+      hintEl.textContent = `✏️ 输入 "${word.en}" 并选择正确中文`;
+
+      currentOptions = generateOptions(correctAnswer, word.en);
+      optionsBtns.forEach((btn, idx) => {
+        btn.textContent = currentOptions[idx] || '?';
+        btn.dataset.correct = (currentOptions[idx] === correctAnswer) ? 'true' : 'false';
+        btn.classList.remove('correct', 'wrong');
+        btn.disabled = false;
+      });
+
+      feedbackText.textContent = `输入单词，再选中文`;
+      feedbackEmoji.textContent = '⌨️';
+    }
+
+    function updateStats() {
+      scoreSpan.textContent = score;
+      totalSpan.textContent = wordList.length;
+      const done = Math.min(totalAttempts, wordList.length);
+      progressSpan.textContent = `${done}/${wordList.length}`;
+    }
+
+    function isAllDone() {
+      return currentIndex >= wordList.length;
+    }
+
+    function onOptionClick(e) {
+      const btn = e.currentTarget;
+      if (answered) return;
+      if (isAllDone()) return;
+      if (btn.disabled) return;
+
+      const typed = wordInput.value.trim();
+      if (typed.toLowerCase() !== currentWordObj.en.toLowerCase()) {
+        feedbackText.textContent = `❌ 请先正确输入 "${currentWordObj.en}"`;
+        feedbackEmoji.textContent = '⌨️';
+        wordInput.focus();
+        return;
+      }
+
+      const isCorrect = btn.dataset.correct === 'true';
+      answered = true;
+      optionsBtns.forEach(b => b.disabled = true);
+      wordInput.disabled = true;
+      checkBtn.disabled = true;
+
+      optionsBtns.forEach(b => {
+        if (b.dataset.correct === 'true') {
+          b.classList.add('correct');
+        } else {
+          b.classList.add('wrong');
+        }
+      });
+
+      if (isCorrect) {
+        score++;
+        feedbackText.textContent = `🎉 正确！ +1分 (${currentWordObj.en} = ${currentWordObj.zh})`;
+        feedbackEmoji.textContent = '🌟';
+      } else {
+        feedbackText.textContent = `😓 选错了，正确是 “${correctAnswer}”`;
+        feedbackEmoji.textContent = '💪';
+      }
+
+      totalAttempts++;
+      updateStats();
+
+      if (currentIndex >= wordList.length - 1) {
+        setTimeout(() => {
+          if (currentIndex >= wordList.length - 1) {
+            loadWord(wordList.length);
+            updateStats();
+          }
+        }, 300);
+      }
+    }
+
+    function nextWord() {
+      if (isAllDone()) return;
+      if (!answered && !isAllDone()) {
+        const typed = wordInput.value.trim();
+        if (typed.toLowerCase() !== currentWordObj.en.toLowerCase()) {
+          feedbackText.textContent = `⚠️ 先正确输入 "${currentWordObj.en}" 再继续`;
+          feedbackEmoji.textContent = '✏️';
+          wordInput.focus();
+          return;
+        }
+        feedbackText.textContent = `👀 请选择一个中文意思`;
+        feedbackEmoji.textContent = '👇';
+        return;
+      }
+      currentIndex++;
+      if (currentIndex >= wordList.length) {
+        loadWord(wordList.length);
+        updateStats();
+        return;
+      }
+      loadWord(currentIndex);
+      updateStats();
+      if (currentIndex >= wordList.length) {
+        loadWord(wordList.length);
+        updateStats();
+      }
+    }
+
+    function resetGame() {
+      wordList = shuffleArray([...FULL_WORDS]);
+      currentIndex = 0;
+      score = 0;
+      totalAttempts = 0;
+      answered = false;
+      updateStats();
+      loadWord(0);
+      wordInput.disabled = false;
+      wordInput.focus();
+      feedbackText.textContent = '新的一轮！加油 💪';
+      feedbackEmoji.textContent = '🚀';
+      optionsBtns.forEach(btn => btn.disabled = false);
+      checkBtn.disabled = false;
+    }
+
+    // ---------- 事件绑定 ----------
+    optionsBtns.forEach(btn => {
+      btn.addEventListener('click', onOptionClick);
+    });
+
+    checkBtn.addEventListener('click', function() {
+      if (isAllDone()) return;
+      if (answered) return;
+      const typed = wordInput.value.trim();
+      if (typed.toLowerCase() === currentWordObj.en.toLowerCase()) {
+        feedbackText.textContent = `✅ 打字正确！现在选中文意思`;
+        feedbackEmoji.textContent = '👆';
+      } else {
+        feedbackText.textContent = `❌ 输入 "${currentWordObj.en}"`;
+        feedbackEmoji.textContent = '⌨️';
+        wordInput.value = '';
+        wordInput.focus();
+      }
+    });
+
+    wordInput.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        checkBtn.click();
+      }
+    });
+
+    nextBtn.addEventListener('click', nextWord);
+    resetBtn.addEventListener('click', resetGame);
+
+    // ---------- 初始化 ----------
+    resetGame();
+  })();
+</script>
+</body>
+</html>
